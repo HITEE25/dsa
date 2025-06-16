@@ -1,36 +1,77 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-int duplicate(int arr[],int n){
-    int dup;
-    cout << "Enter the number you want to check\n";
-    cin >> dup;
-    int count = 0;
-    for(int i=0;i<n;i++){
-        if(arr[i] == dup){
-            count++;
-        }
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
     }
-    if(count > 1){
-        return 1;
-    }
-    return 0;
+};
+
+void insertAtHead(Node *&head, int data)
+{
+    Node *temp = new Node(data);
+    temp->next = head;
+    head = temp;
 }
 
+void print(Node *&head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
 
-int main(){
-    int arr[10];
-    int n;
-    cout << "Enter the number of array\n";
-    cin >> n;
-    cout << "Enter the elements of array\n";
-    for(int i=0;i<n;i++){
-        cin >> arr[i];
+Node *removeDuplicates(Node *&head)
+{
+    // Write your code here
+    Node *curr = head;
+    while (curr != NULL)
+    {
+        Node *prev = curr; // t means we're initializing a pointer named prev to point to the same node as curr at the start of the inner loop. So prev starts off pointing to the current node being evaluated for duplicates.
+        Node *temp = curr->next;
+        while (temp != NULL)
+        {
+            if (curr->data == temp->data)
+            {
+                Node *nextPointer = temp->next;
+                delete temp;
+                prev->next = nextPointer;
+                temp = temp->next;
+            }
+            else
+            {                // curr -> data != temp -> data
+                prev = temp; // Move prev one step forward to point to temp. This is important because prev always needs to point to the node just before temp (in case a duplicate is found later and we need to delete temp).
+                temp = temp->next;
+            }
+        }
+        curr = curr->next;
     }
-    if(duplicate(arr,n)){
-        cout << "duplicate was found\n";
-    }
-    else{
-        cout << "duplicate was not found\n";
-    }
+    return head;
+}
+
+int main()
+{
+    Node *node1 = new Node(45);
+    cout << node1->data << endl;
+    cout << node1->next << endl;
+
+    Node *head = node1;
+    insertAtHead(head, 67);
+    insertAtHead(head, 57);
+    insertAtHead(head, 67);
+    insertAtHead(head, 45);
+    insertAtHead(head, 57);
+    print(head);
+    Node* duplicate = removeDuplicates(head);
+    print(head);
 }
