@@ -1,14 +1,20 @@
 #include<iostream>
 using namespace std;
 
-int main(){
-    int a,n;
-    cout << "Enter the value of a and n\n";
-    cin >> a >> n;
-    int pow = 1;
+int power(int n){
 
-    for(int i=1;i<=n;i++){
-        pow = pow*a;
-    }
-    cout << "Answer is " << pow ;
+    if(n == 0)
+    return 1;
+
+    return 2 * power(n-1);
+}
+
+int main(){
+    int n;
+    cout << "Enter the value of n" << endl;
+    cin >> n;
+
+    int ans = power(n);
+    cout << ans << endl;
+    return 0;
 }
