@@ -5,26 +5,23 @@ int main(){
     int n;
     cout << "Enter the number\n";
     cin >> n;
-    int i = 2;
-    int flag = 0;
+    bool isPrime = 1;
 
     if(n <= 1){
         cout << "Not a prime number\n";
-        return 0;
+    }
+
+    for(int i=2;i*i<=n;i++){
+            if(n%i == 0){
+                isPrime = 0;
+                break;
+            }
+    }
+
+    if(isPrime){
+        cout << "Prime number" << endl;
     }
     else{
-    while(i*i <= n){
-        if(n%i == 0){
-            flag = 1;
-            break;
-        }
-        i++;
+        cout << "Not a prime number" << endl;
     }
-}
-if(flag){
-    cout << "Not a prime number\n";
-}
-else{
-    cout << "Prime number\n";
-}
 }
