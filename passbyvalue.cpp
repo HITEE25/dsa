@@ -1,11 +1,13 @@
 #include<iostream>
 using namespace std;
 
-void dummy(int n){
+void update(int n){
     n++;
-    cout << "In dummy function" <<n << " ";
 }
 
 int main(){
-    int 
+    int n=9;
+    cout << "before " << n << endl;
+    update(n);
+    cout << "After " << n << endl;
 }
