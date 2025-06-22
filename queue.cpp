@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 
 int main(){
@@ -16,7 +17,7 @@ int main(){
 
   cout << "Size of the queue is " << q.size() << endl;
 
-  if(s.empty()){
+  if(q.empty()){
     cout << "Queue is empty " << endl;
   }
   else{
